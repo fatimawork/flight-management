@@ -9,6 +9,7 @@ const Utilisateur = sequelize.define('Utilisateur', {
     },
     nom: DataTypes.STRING,
     prenom: DataTypes.STRING,
+    password: DataTypes.STRING,
     email: DataTypes.STRING,
     telephone: DataTypes.STRING
   });
