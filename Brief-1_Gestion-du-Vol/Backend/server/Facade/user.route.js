@@ -6,7 +6,7 @@ const users_controller = require('../Services/user.controller');
 
 const router = express.Router();
 
-router.post('/', users_controller.create);
+
 router.get('/', users_controller.getAll);
 router.get('/:id', users_controller.getById);
 router.put('/:id', users_controller.update);
