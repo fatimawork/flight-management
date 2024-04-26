@@ -9,6 +9,7 @@ const Utilisateur = sequelize.define('Utilisateur', {
     },
     nom: DataTypes.STRING,
     prenom: DataTypes.STRING,
+    password: DataTypes.STRING,
     email: DataTypes.STRING,
     telephone: DataTypes.STRING
   });
@@ -67,6 +68,22 @@ const Utilisateur = sequelize.define('Utilisateur', {
     timestamps: false
 }
 );
+
+const Escale = sequelize.define('Escale', {
+  escale_id: {
+    type: DataTypes.BIGINT,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  ville_escale: DataTypes.STRING,
+  heure_escale: DataTypes.TIME,
+  date_escale: DataTypes.DATE
+},
+{
+  timestamps: false
+}
+);
+
   
   // Define associations between tables
   Vols.hasMany(Reservation, { foreignKey: 'vol_id' });
@@ -80,6 +97,9 @@ const Utilisateur = sequelize.define('Utilisateur', {
   
   Reservation.hasMany(Extras, { foreignKey: 'reservation_id' });
   Extras.belongsTo(Reservation, { foreignKey: 'reservation_id' });
+
+  Vols.hasMany(Escale, { foreignKey: 'vol_id' });
+  Escale.belongsTo(Vols, { foreignKey: 'vol_id' });
   
   // Synchronize the models with the database
   sequelize.sync();
@@ -90,5 +110,6 @@ const Utilisateur = sequelize.define('Utilisateur', {
     Vols,
     Reservation,
     Paiement,
-    Extras
+    Extras,
+    Escale
   };
