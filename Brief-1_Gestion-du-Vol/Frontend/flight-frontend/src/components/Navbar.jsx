@@ -13,9 +13,9 @@ function Navbar() {
                     </button>
                     <div className="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                         <div className="navbar-nav ml-auto py-0">
-                            <a href="index.html" className="nav-item nav-link active">Home</a>
-                            <a href="about.html" className="nav-item nav-link">About</a>
-                            <a href="destination.html" className="nav-item nav-link">Destination</a>
+                            <a href="/" className="nav-item nav-link active">Home</a>
+                            <a href="/about" className="nav-item nav-link">About</a>
+                            <a href="/destination" className="nav-item nav-link">Destination</a>
                             <a href="contact.html" className="nav-item nav-link">Contact</a>
                         </div>
                     </div>

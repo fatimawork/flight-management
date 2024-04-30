@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Booking = () => {
   const [from, setFrom] = useState('');
@@ -6,10 +7,12 @@ const Booking = () => {
   const [departDate, setDepartDate] = useState('');
   const [returnDate, setReturnDate] = useState('');
   const [passengers, setPassengers] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic here
+    navigate('/available-flights');
   };
 
   return (
