@@ -6,8 +6,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './components/Navbar';
 import Carousel from './components/Carousel';
 import Booking from './components/Booking';
+import AboutPage from './components/AboutPage';
+import FeaturesDestinationsPackages from './components/FeaturesDestinationsPackages';
 function App() {
-  const [count, setCount] = useState(0)
 
   
       return (
@@ -15,6 +16,8 @@ function App() {
         <Navbar />
         <Carousel />
         <Booking />
+        <AboutPage/>
+        <FeaturesDestinationsPackages/>
        
     </div>
     );
