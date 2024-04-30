@@ -84,6 +84,7 @@ const Escale = sequelize.define('Escale', {
 }
 );
 
+
   
   // Define associations between tables
   Vols.hasMany(Reservation, { foreignKey: 'vol_id' });
@@ -100,6 +101,10 @@ const Escale = sequelize.define('Escale', {
 
   Vols.hasMany(Escale, { foreignKey: 'vol_id' });
   Escale.belongsTo(Vols, { foreignKey: 'vol_id' });
+
+
+  
+  
   
   // Synchronize the models with the database
   sequelize.sync();

@@ -8,8 +8,9 @@ const router = express.Router();
 
 router.post('/', volController.create);
 router.get('/', volController.getAll);
-router.get('/:id', volController.getById);
+router.get('/getById/:id', volController.getById);
 router.put('/:id', volController.update);
 router.delete('/:id', volController.delete);
+router.get('/volsByArriveDest', volController.getVolsByArriveDest);
 
 module.exports = router;

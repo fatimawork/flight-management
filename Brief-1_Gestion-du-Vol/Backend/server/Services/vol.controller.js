@@ -42,6 +42,23 @@ exports.update = async (req, res) => {
         res.status(400).json({ error: error.message });
       }
 }
+exports.getVolsByArriveDest = async (req, res) => {
+  try {
+    console.log(req.body.depart);
+    console.log(req.body.arrivee);
+      const vols = await Vols.findAll(
+        {
+          where: {
+            ville_depart: req.body.depart,
+            ville_arrivee: req.body.arrivee
+          }
+        }
+      );
+      res.json(vols);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+}
 
 exports.delete = async (req, res) => {
     try {
