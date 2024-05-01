@@ -1,6 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
+    const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    // Check if user is logged in on component mount
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        setIsLoggedIn(!!token);
+    }, []);
+
+    const handleLogout = () => {
+        // Clear token from local storage
+        localStorage.removeItem('token');
+        // Update login status
+        setIsLoggedIn(false);
+        // Redirect to home page or any other route after logout
+        navigate('/');
+    };
+
     return (
         <div className="container-fluid position-relative nav-bar p-0">
             <div className="container-lg position-relative p-0 px-lg-3" style={{ zIndex: 9 }}>
@@ -16,7 +35,14 @@ function Navbar() {
                             <a href="/" className="nav-item nav-link active">Home</a>
                             <a href="/about" className="nav-item nav-link">About</a>
                             <a href="/destination" className="nav-item nav-link">Destination</a>
-                            <a href="contact.html" className="nav-item nav-link">Contact</a>
+                            {isLoggedIn ? (
+                                <button onClick={handleLogout} className="btn btn-danger mr-2 my-3 px-10">Logout</button>
+                            ) : (
+                                <>
+                                    <button onClick={()=>navigate('/login')} className="btn btn-primary mr-2 my-3 px-10">Login</button>
+                                    <button onClick={()=>navigate('/register')} className="btn btn-secondary  my-3 px-10">Register</button>
+                                </>
+                            )}
                         </div>
                     </div>
                 </nav>

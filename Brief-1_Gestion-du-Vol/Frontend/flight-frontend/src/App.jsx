@@ -15,6 +15,8 @@ import Destination from './pages/Destination';
 import AvailableVols from './pages/AvailablVols';
 import Payment from './pages/Payment';
 import Extras from './pages/Extras';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
         <Route path="/available-flights" element={<AvailableVols />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/extras" element={<Extras />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         {/* Other routes */}
       </Routes>
     </div>

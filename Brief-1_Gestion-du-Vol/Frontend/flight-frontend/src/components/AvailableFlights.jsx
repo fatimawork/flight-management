@@ -1,6 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 function AvailableFlights() {
+  const location = useLocation();
+  const { from, destination, departDate, passengers } = location.state;
+
+  const [vols,setVols] = useState([])
+  useEffect(()=>{
+    fetchAvailableFlights()
+  },[from,destination,departDate])
+   async function fetchAvailableFlights() {
+    console.log(JSON.stringify({
+      depart: from,
+          arrivee: destination,
+          date_depart: departDate+"T00:00:00.000Z"
+    }))
+    try {
+      const response = await fetch(`http://localhost:3000/api/vol/volsByArriveDest`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({
+          depart: from,
+          arrivee: destination,
+          date_depart: departDate+"T00:00:00.000Z"
+        })
+      });
+      const data = await response.json();
+      setVols(data)
+      console.log(data); // Handle the response data
+    } catch (error) {
+      console.error('Error fetching available flights:', error);
+    }
+  }
+  
   return (
     <div className="container-fluid py-5">
       <div className="container pt-5 pb-3">
@@ -10,31 +45,25 @@ function AvailableFlights() {
         </div>
         <div className="container mt-5">
           <div className="row">
-            <div className="col-md-6 mb-4">
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="card-title">Flight 1</h5>
-                  <p className="card-text">Departure: City 1 | Arrival: City 2</p>
-                  <p className="card-text">Departure Time: 08:00 | Arrival Time: 10:00</p>
-                  <p className="card-text">Price: $200</p>
-                  <a href="/extras" className="btn btn-primary">Add Extras</a>
-                  <a href="/payment" className="btn btn-secondary ml-2">Book Now</a>
+            {
+              vols.map((vol,i)=>(
+                <div className="col-md-6 mb-4">
+                <div className="card">
+                  <div className="card-body">
+                    <h5 className="card-title">Flight {i+1}</h5>
+                    <p className="card-text">Departure: {vol.ville_depart} | Arrival: {vol.ville_arrivee}</p>
+                    <p className="card-text">Departure Time: {vol.heure_depart} | Arrival Time: {vol.heure_arrivee}</p>
+                    <p className="card-text">Price: ${vol.prix}</p>
+                    <a href="/extras" className="btn btn-primary">Add Extras</a>
+                    <a href="/payment" className="btn btn-secondary ml-2">Book Now</a>
+                  </div>
                 </div>
-              </div>
-            </div>
+                </div>
+              ))
+            }
+           
             {/* Add margin between cards */}
-            <div className="col-md-6 mb-4">
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="card-title">Flight 2</h5>
-                  <p className="card-text">Departure: City 3 | Arrival: City 4</p>
-                  <p className="card-text">Departure Time: 09:00 | Arrival Time: 11:00</p>
-                  <p className="card-text">Price: $250</p>
-                  <a href="/extras" className="btn btn-primary">Add Extras</a>
-                  <a href="#" className="btn btn-secondary ml-2">Book Now</a>
-                </div>
-              </div>
-            </div>
+           
             {/* Add more flight cards here */}
           </div>
         </div>
