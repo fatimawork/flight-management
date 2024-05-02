@@ -1,15 +1,59 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function ExtrasForm() {
+  // State to manage selected extra and total amount
+  const [selectedExtra, setSelectedExtra] = useState('');
+  const [totalAmount, setTotalAmount] = useState(0);
+  const navigate = useNavigate();
+
+  // Function to handle selection change
+  const handleExtraChange = (event) => {
+    const selectedExtraValue = event.target.value;
+    setSelectedExtra(selectedExtraValue);
+
+    // Update total amount based on selected extra
+    let newTotalAmount = 0;
+    switch (selectedExtraValue) {
+      case "travel_insurance":
+        newTotalAmount = 50;
+        break;
+      case "in_flight_meal":
+        newTotalAmount = 20;
+        break;
+      case "hotel_accommodation":
+        newTotalAmount = 100;
+        break;
+      default:
+        newTotalAmount = 0;
+    }
+    setTotalAmount(newTotalAmount);
+  };
+
+ // Function to handle form submission
+const handleSubmit = (event) => {
+  event.preventDefault();
+  // Redirect to payment page with total amount as query parameter
+  navigate(`/payment?amount=${totalAmount}`);
+};
+
   return (
     <div className="container mt-5">
       <h1>Extras Selection</h1>
       <p>Please select any additional services you would like to add to your booking:</p>
-      <form action="payment.html">
+      <form onSubmit={handleSubmit}>
         <div className="card mb-3">
           <div className="card-body">
             <div className="form-check">
-              <input className="form-check-input" type="radio" name="extra" id="extra1" value="travel_insurance" />
+              <input
+                className="form-check-input"
+                type="radio"
+                name="extra"
+                id="extra1"
+                value="travel_insurance"
+                checked={selectedExtra === "travel_insurance"}
+                onChange={handleExtraChange}
+              />
               <label className="form-check-label" htmlFor="extra1">
                 Travel Insurance
               </label>
@@ -22,7 +66,15 @@ export default function ExtrasForm() {
         <div className="card mb-3">
           <div className="card-body">
             <div className="form-check">
-              <input className="form-check-input" type="radio" name="extra" id="extra2" value="in_flight_meal" />
+              <input
+                className="form-check-input"
+                type="radio"
+                name="extra"
+                id="extra2"
+                value="in_flight_meal"
+                checked={selectedExtra === "in_flight_meal"}
+                onChange={handleExtraChange}
+              />
               <label className="form-check-label" htmlFor="extra2">
                 In-flight Meal
               </label>
@@ -35,7 +87,15 @@ export default function ExtrasForm() {
         <div className="card mb-3">
           <div className="card-body">
             <div className="form-check">
-              <input className="form-check-input" type="radio" name="extra" id="extra3" value="hotel_accommodation" />
+              <input
+                className="form-check-input"
+                type="radio"
+                name="extra"
+                id="extra3"
+                value="hotel_accommodation"
+                checked={selectedExtra === "hotel_accommodation"}
+                onChange={handleExtraChange}
+              />
               <label className="form-check-label" htmlFor="extra3">
                 Hotel Accommodation
               </label>
