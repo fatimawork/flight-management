@@ -5,14 +5,15 @@ const Booking = () => {
   const [from, setFrom] = useState('');
   const [destination, setDestination] = useState('');
   const [departDate, setDepartDate] = useState('');
-  const [returnDate, setReturnDate] = useState('');
   const [passengers, setPassengers] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic here
-    navigate('/available-flights');
+    navigate('/available-flights',{
+      state:{from,destination,departDate,passengers}
+    });
   };
 
   return (
@@ -21,12 +22,12 @@ const Booking = () => {
         <div className="container pb-5">
           <div className="bg-light shadow p-4">
             <div className="row align-items-center">
-              <div className="col-md-7">
+              <div className="col-md-0">
                 <div className="row">
                   <div className="col-md-3 mb-3">
                     <select className="custom-select" style={{ height: '55px', fontSize: '16px' }} value={from} onChange={e => setFrom(e.target.value)}>
                       <option value="">From</option>
-                      <option value="city1">City 1</option>
+                      <option value="TANTAN">TANTAN</option>
                       <option value="city2">City 2</option>
                       <option value="city3">City 3</option>
                     </select>
@@ -34,16 +35,13 @@ const Booking = () => {
                   <div className="col-md-3 mb-3">
                     <select className="custom-select" style={{ height: '55px', fontSize: '16px' }} value={destination} onChange={e => setDestination(e.target.value)}>
                       <option value="">Destination</option>
-                      <option value="destination1">Destination 1</option>
+                      <option value="PARIS">PARIS</option>
                       <option value="destination2">Destination 2</option>
                       <option value="destination3">Destination 3</option>
                     </select>
                   </div>
                   <div className="col-md-3 mb-3">
                     <input type="date" className="form-control" style={{ height: '55px', fontSize: '16px' }} placeholder="Depart Date" value={departDate} onChange={e => setDepartDate(e.target.value)} />
-                  </div>
-                  <div className="col-md-3 mb-3">
-                    <input type="date" className="form-control" style={{ height: '55px', fontSize: '16px' }} placeholder="Return Date" value={returnDate} onChange={e => setReturnDate(e.target.value)} />
                   </div>
                 </div>
               </div>
