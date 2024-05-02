@@ -46,7 +46,7 @@ export default function ExtrasForm() {
         </div>
 
         <button type="submit" className="btn btn-primary mt-3">Proceed to Payment</button>
-        <a href="payment.html" className="btn btn-secondary mt-3 ml-2">Skip to Payment</a>
+        <a href="/payment" className="btn btn-secondary mt-3 ml-2">Skip to Payment</a>
       </form>
     </div>
   );

@@ -11,6 +11,6 @@ router.get('/', volController.getAll);
 router.get('/getById/:id', volController.getById);
 router.put('/:id', volController.update);
 router.delete('/:id', volController.delete);
-router.get('/volsByArriveDest', volController.getVolsByArriveDest);
+router.post('/volsByArriveDest', volController.getVolsByArriveDestDate);
 
 module.exports = router;
