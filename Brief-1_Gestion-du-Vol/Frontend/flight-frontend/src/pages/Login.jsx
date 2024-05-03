@@ -28,8 +28,9 @@ function Login() {
                 setEmail('');
                 setPassword('');
                 setError('');
-                // retour au page precedent 
                 navigate('/');
+        
+;
 
 
                 // Redirect or perform any other action upon successful login
