@@ -9,6 +9,7 @@ export default function Extras() {
         <Header header="Extras" />
         <ExtrasForm />
         <Footer />
+
     </div>
   )
 }

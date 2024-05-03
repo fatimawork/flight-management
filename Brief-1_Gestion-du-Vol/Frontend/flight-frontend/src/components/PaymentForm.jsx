@@ -1,6 +1,10 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 function PaymentForm() {
+  const location = useLocation();
+  const totalAmount = new URLSearchParams(location.search).get('amount');
+
   const handlePaymentMethodChange = (event) => {
     const selectedPaymentMethod = event.target.value;
     // Show/hide payment option based on selected payment method
@@ -26,6 +30,11 @@ function PaymentForm() {
           <option value="paypal">PayPal</option>
           <option value="bankTransfer">Bank Transfer</option>
         </select>
+      </div>
+
+      {/* Total amount */}
+      <div>
+        <p>Total Amount: ${totalAmount}</p>
       </div>
 
       {/* Credit card payment form */}
@@ -62,7 +71,7 @@ function PaymentForm() {
         <p>Bank Name: XYZ Bank</p>
         <p>Account Number: 1234567890</p>
         <p>Account Holder: Your Name</p>
-        <p>Amount: $XXX</p>
+        <p>Amount: ${totalAmount}</p> {/* Display total amount here */}
         <button type="submit" className="btn btn-primary">Payment Completed</button>
       </div>
     </div>
