@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useBooking } from '../components/BookingContext'; // Adjust the import path based on your directory structure
+ 
 
 const Booking = () => {
   const [from, setFrom] = useState('');
@@ -8,13 +10,14 @@ const Booking = () => {
   const [returnDate, setReturnDate] = useState('');
   const [passengers, setPassengers] = useState('');
   const navigate = useNavigate();
+  const { updateBookingDetails } = useBooking(); // Use the context updater function
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic here
-    navigate('/available-flights',{
-      state:{from,destination,departDate,returnDate,passengers}
-    });
+    updateBookingDetails({ from, destination, departDate, returnDate, passengers });
+    navigate('/available-flights')
   };
 
   return (
@@ -29,7 +32,7 @@ const Booking = () => {
                     <select className="custom-select" style={{ height: '55px', fontSize: '16px' }} value={from} onChange={e => setFrom(e.target.value)}>
                       <option value="">From</option>
                       <option value="TANTAN">TANTAN</option>
-                      <option value="city2">City 2</option>
+                      <option value="FES">FES</option>
                       <option value="city3">City 3</option>
                     </select>
                   </div>

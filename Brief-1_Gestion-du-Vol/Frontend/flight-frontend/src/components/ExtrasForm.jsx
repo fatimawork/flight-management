@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {useBooking} from './BookingContext';
 
 export default function ExtrasForm() {
   // State to manage selected extra and total amount
   const [selectedExtra, setSelectedExtra] = useState('');
   const [totalAmount, setTotalAmount] = useState(0);
   const navigate = useNavigate();
+  const {bookingDetails, updateBookingDetails} = useBooking();
 
   // Function to handle selection change
   const handleExtraChange = (event) => {
@@ -27,14 +29,16 @@ export default function ExtrasForm() {
       default:
         newTotalAmount = 0;
     }
-    setTotalAmount(newTotalAmount);
+    console.log(newTotalAmount+bookingDetails.totalAmount);
+    setTotalAmount(newTotalAmount+bookingDetails.totalAmount);
   };
 
  // Function to handle form submission
 const handleSubmit = (event) => {
   event.preventDefault();
   // Redirect to payment page with total amount as query parameter
-  navigate(`/payment?amount=${totalAmount}`);
+  updateBookingDetails({totalAmount});
+  navigate('/checkout');
 };
 
   return (
@@ -106,7 +110,7 @@ const handleSubmit = (event) => {
         </div>
 
         <button type="submit" className="btn btn-primary mt-3">Proceed to Payment</button>
-        <a href="/payment" className="btn btn-secondary mt-3 ml-2">Skip to Payment</a>
+        <a href="/checkout" className="btn btn-secondary mt-3 ml-2">Skip to Payment</a>
       </form>
     </div>
   );
