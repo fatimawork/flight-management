@@ -7,7 +7,8 @@ function Register() {
         password: '',
         nom: '',
         prenom: '',
-        telephone: ''
+        telephone: '',
+        role:'USER'
     });
     const [error, setError] = useState('');
     const history = useNavigate();

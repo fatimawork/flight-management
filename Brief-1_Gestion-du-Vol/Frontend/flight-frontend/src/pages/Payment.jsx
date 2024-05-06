@@ -9,7 +9,6 @@ export default function Payment() {
         <Header header="Payment" />
         <PaymentForm />
         <Footer />
-
     </div>
   )
 }

@@ -11,6 +11,7 @@ const Utilisateur = sequelize.define('Utilisateur', {
     prenom: DataTypes.STRING,
     password: DataTypes.STRING,
     email: DataTypes.STRING,
+    role:DataTypes.STRING,
     telephone: DataTypes.STRING
   });
   
@@ -96,8 +97,8 @@ const Escale = sequelize.define('Escale', {
   Reservation.hasMany(Paiement, { foreignKey: 'reservation_id' });
   Paiement.belongsTo(Reservation, { foreignKey: 'reservation_id' });
   
-  Reservation.hasMany(Extras, { foreignKey: 'reservation_id' });
-  Extras.belongsTo(Reservation, { foreignKey: 'reservation_id' });
+  Extras.hasMany(Reservation, { foreignKey: 'extra_id' });
+  Reservation.belongsTo(Extras, { foreignKey: 'extra_id' });
 
   Vols.hasMany(Escale, { foreignKey: 'vol_id' });
   Escale.belongsTo(Vols, { foreignKey: 'vol_id' });

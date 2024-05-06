@@ -17,7 +17,7 @@ router.use('/users',authenticateToken, usersRouter);
 router.use('/reservation',authenticateToken, reservationRouter);
 router.use('/extras',authenticateToken, extrasRouter);
 router.use('/paiement',authenticateToken, paiementRouter);
-router.use('/vol',authenticateToken, volRouter);
+router.use('/vol', volRouter);
 router.use('/escale',authenticateToken, escaleRouter);
 router.use('/',authRouter)
 

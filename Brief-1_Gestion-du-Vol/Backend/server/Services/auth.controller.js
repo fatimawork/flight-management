@@ -7,7 +7,7 @@ require('dotenv').config();
 
 exports.register = async (req, res) => {
   try {
-    const { email, password ,nom,prenom,telephone  } = req.body;
+    const { email, password ,nom,prenom,telephone,role  } = req.body;
 
     // Check if user with the provided email already exists
     const existingUser = await Utilisateur.findOne({ where: { email } });
@@ -19,7 +19,7 @@ exports.register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create a new user
-    const newUser = await Utilisateur.create({ email, password: hashedPassword,nom,prenom,telephone });
+    const newUser = await Utilisateur.create({ email, password: hashedPassword,nom,prenom,telephone,role });
 
     // Generate JWT token
     const token = jwt.sign({ userId: newUser.id }, process.env.SECRET_KEY, { expiresIn: '1h' });
@@ -47,7 +47,8 @@ exports.login = async (req, res) => {
     }
 
     // Generate JWT token
-    const token = jwt.sign({ userId: user.id }, process.env.SECRET_KEY, { expiresIn: '1h' });
+    console.log('user',user.user_id)
+    const token = jwt.sign({ userId: user.user_id }, process.env.SECRET_KEY, { expiresIn: '1h' });
 
     res.status(200).json({ token });
   } catch (error) {

@@ -7,7 +7,20 @@ function Login() {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-
+    const decodeToken = (token) => {
+        try {
+          const base64Url = token.split('.')[1]; // Get the payload part of the token
+          const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); // Convert Base64URL to Base64
+          const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+              return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+          }).join('')); // Convert Base64 to ASCII and URI decode
+      
+          return JSON.parse(jsonPayload); // Convert JSON string to object
+        } catch (e) {
+          console.error('Error decoding token:', e);
+          return null;
+        }
+      };
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -24,12 +37,16 @@ function Login() {
                 // Do something with the token (e.g., store it in local storage)
                 console.log('Login successful. Token:', token);
                 localStorage.setItem('token', token);
+                const userId = decodeToken(token).userId;
+                localStorage.setItem('userId', userId)
                 // Reset form fields and error state
                 setEmail('');
                 setPassword('');
                 setError('');
-                // retour au page precedent 
                 navigate('/');
+                window.location.reload()
+        
+;
 
 
                 // Redirect or perform any other action upon successful login

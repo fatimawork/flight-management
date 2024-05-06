@@ -16,6 +16,7 @@ function Navbar() {
         localStorage.removeItem('token');
         // Update login status
         setIsLoggedIn(false);
+
         // Redirect to home page or any other route after logout
         navigate('/');
     };
